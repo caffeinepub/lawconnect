@@ -1,0 +1,574 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "LawConnect frontend MVP (marketing, directory, dashboards, booking, chat, subscriptions)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Internet Identity sign-in + onboarding role selection (Client/Lawyer) with role-gated navigation and dashboards.",
+      "acceptanceCriteria": [
+        "Users can sign in with Internet Identity.",
+        "After first sign-in, users must select exactly one role: Client or Lawyer.",
+        "Users can later view their role on their dashboard; role-gated pages/actions are not accessible from the wrong role (e.g., only lawyers can edit availability)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create app shell with routing and authenticated areas; integrate Internet Identity session state and role-based redirects. Use the selected authorization component patterns for authenticated user/profile gating; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "create",
+          "description": "Define route map for public marketing pages and authenticated client/lawyer areas, including onboarding route and role-based dashboard routes."
+        },
+        {
+          "path": "frontend/src/components/auth/RequireAuth.tsx",
+          "operation": "create",
+          "description": "Add a wrapper that requires Internet Identity authentication before rendering protected routes; on logout, ensure cached app data is cleared using React Query. Use the selected authorization component guidance for login/logout cache clearing; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/RequireRole.tsx",
+          "operation": "create",
+          "description": "Add a wrapper that blocks/redirects when the caller has the wrong app role (Client vs Lawyer) based on backend user profile/role; show an access denied view when unauthorized. Use the selected authorization component guidance for role-gated UI; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/auth/OnboardingRole.tsx",
+          "operation": "create",
+          "description": "Create the post-login onboarding screen that forces choosing exactly one role (Client or Lawyer), calls backend role completion, and routes to the appropriate dashboard. Use the selected authorization component guidance for user profile setup without modal flash; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/auth/ProfileSetup.tsx",
+          "operation": "create",
+          "description": "Create first-login profile setup (name) using getCallerUserProfile/saveCallerUserProfile and show it only when needed to avoid flashing. Use the selected authorization component guidance for profile setup flow; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useCurrentUser.ts",
+          "operation": "create",
+          "description": "Create React Query hooks to load current user profile and caller role (getCallerUserProfile, getCallerUserRole) and expose derived app-role state for routing/guards. Use the selected authorization component patterns for actor dependency and query enabling; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/nav/AccountMenu.tsx",
+          "operation": "create",
+          "description": "Add login/logout UI using Internet Identity and show the user name (not principal) plus current role when available. Use the selected authorization component Login Button guidance; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Public marketing homepage with required sections and CTAs to Find a Lawyer and Join as a Lawyer.",
+      "acceptanceCriteria": [
+        "Homepage renders all requested sections with clear headings and CTAs in English.",
+        "Buttons navigate to the corresponding flows/pages (Find a Lawyer, Join as a Lawyer).",
+        "Testimonials display from seeded static data (no admin UI required)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/marketing/Home.tsx",
+          "operation": "create",
+          "description": "Implement homepage sections: hero + CTAs, How It Works (3 steps), subscription plans preview (client + lawyer), testimonials (static seed data), For Businesses section, and final CTA section; wire CTAs to directory and join flow."
+        },
+        {
+          "path": "frontend/src/components/marketing/Testimonials.tsx",
+          "operation": "create",
+          "description": "Create testimonials section rendering seeded static testimonial data (no backend/admin)."
+        },
+        {
+          "path": "frontend/src/components/layout/PublicLayout.tsx",
+          "operation": "create",
+          "description": "Create marketing layout with header/nav and footer shared across public pages; include primary CTAs and consistent spacing."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register the public homepage route and ensure Find a Lawyer and Join as a Lawyer CTAs navigate to the correct routes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Apply a distinctive, consistent LawConnect theme across the entire app (avoid blue/purple dominant palette).",
+      "acceptanceCriteria": [
+        "A consistent theme is applied across the app (marketing + authenticated areas).",
+        "Primary/secondary colors are not predominantly blue/purple.",
+        "Buttons, forms, cards, and navigation share consistent styling."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define brand design tokens (CSS variables used by Tailwind/shadcn theming) and global typography/spacing rules with a warm neutral/earth-tone palette (non-blue/purple dominant) applied consistently."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust theme extensions (colors/radius/shadows/typography) to align with the LawConnect palette and ensure consistent component styling across marketing and dashboards."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create authenticated layout (sidebar/topbar) that shares the same theme primitives as marketing pages; compose existing UI components (do not edit immutable UI component files)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Find a Lawyer directory page with filtering and lawyer cards linking into profile and booking flow.",
+      "acceptanceCriteria": [
+        "Directory page lists lawyers from backend data and updates results when filters change.",
+        "Each lawyer card displays the requested fields and links to the lawyer profile page.",
+        "Availability filter (Today/This Week) affects results based on the lawyer’s published availability slots."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/directory/FindLawyers.tsx",
+          "operation": "create",
+          "description": "Create directory UI with filters (practice area, location, experience level, language, rating, availability Today/This Week) and results list driven by backend data; update results when filters change."
+        },
+        {
+          "path": "frontend/src/components/lawyers/LawyerCard.tsx",
+          "operation": "create",
+          "description": "Create lawyer card UI showing profile photo (use placeholder where needed), years of experience, specialization, consultation fee, availability indicator/button, and a Subscribe & Book CTA linking into booking flow."
+        },
+        {
+          "path": "frontend/src/hooks/useLawyers.ts",
+          "operation": "create",
+          "description": "Add React Query hooks to load lawyers (findLawyers) and implement client-side filtering/sorting for the directory, including deterministic featured/priority placement when applicable."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register the Find a Lawyer route and ensure marketing CTAs navigate here."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Verified lawyer profile page with bio, credentials, expertise, reviews, fee, available time slots, and CTAs to book/subscribe.",
+      "acceptanceCriteria": [
+        "Lawyer profile page loads from backend by lawyer id and shows all requested sections.",
+        "Available time slots are shown and can be selected to start a booking.",
+        "Reviews render from backend seed/user-submitted data (see reviews requirement)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/lawyers/LawyerProfile.tsx",
+          "operation": "create",
+          "description": "Implement lawyer profile view (bio, credentials, areas of expertise, reviews, consultation fee, available time slots) with CTAs to book consultation and subscribe for ongoing support; load profile data from backend and route param."
+        },
+        {
+          "path": "frontend/src/components/lawyers/AvailabilitySlots.tsx",
+          "operation": "create",
+          "description": "Render a list of selectable time slots (from backend-provided availability/booking context) and pass selected slot into the booking flow UI."
+        },
+        {
+          "path": "frontend/src/components/reviews/ReviewsList.tsx",
+          "operation": "create",
+          "description": "Render average rating and a list of reviews for the lawyer; handle empty state and show verified/seed reviews consistently."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register lawyer profile route and link lawyer cards to this route."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Consultation booking UI: lawyers manage availability; clients book slots; dashboards show booking status; prevent double-booking (backend enforced) with clear UX.",
+      "acceptanceCriteria": [
+        "Lawyers can create/update/remove their availability slots (date/time + duration).",
+        "Clients can book an available slot with a selected lawyer; the slot becomes unavailable once booked.",
+        "Client dashboard lists upcoming consultations with date/time, lawyer name, and status.",
+        "Lawyer dashboard shows upcoming bookings in a calendar/list view."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/booking/BookConsultation.tsx",
+          "operation": "create",
+          "description": "Create booking flow screen that confirms selected lawyer + slot + duration + fee and calls bookConsultation; handle slot no longer available gracefully (double-booking prevented by backend)."
+        },
+        {
+          "path": "frontend/src/components/dashboard/client/UpcomingConsultations.tsx",
+          "operation": "create",
+          "description": "Add client dashboard section listing upcoming consultations (date/time, lawyer name, status) sourced from getClientDashboard."
+        },
+        {
+          "path": "frontend/src/components/dashboard/lawyer/BookingsView.tsx",
+          "operation": "create",
+          "description": "Add lawyer dashboard bookings view (calendar-like grouped list) using getLawyerDashboard bookings data."
+        },
+        {
+          "path": "frontend/src/components/dashboard/lawyer/AvailabilitySettings.tsx",
+          "operation": "create",
+          "description": "Add lawyer availability settings UI for creating/updating/removing slots; reflect changes in directory/profile availability experiences (subject to backend capabilities)."
+        },
+        {
+          "path": "frontend/src/hooks/useBookings.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for booking creation and dashboard booking retrieval (getClientDashboard, getLawyerDashboard) plus optimistic/invalidations for booking-related updates."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register booking flow route(s) and ensure profile/directory CTAs navigate into booking with the selected lawyer and slot context."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "In-app 1:1 messaging UI between clients and lawyers accessible from both dashboards (poll/refetch).",
+      "acceptanceCriteria": [
+        "Clients can open a conversation with a lawyer they have a booking/connection with and send messages.",
+        "Lawyers can view conversations with clients and reply.",
+        "Messages persist in backend storage and load in chronological order."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/chat/Chat.tsx",
+          "operation": "create",
+          "description": "Implement 1:1 chat UI (conversation list + message thread) accessible from both dashboards and suitable for polling/refetch patterns (no real-time sockets)."
+        },
+        {
+          "path": "frontend/src/components/chat/ConversationList.tsx",
+          "operation": "create",
+          "description": "Create conversation list UI scoped to existing booking/connection relationships and navigable to a selected thread."
+        },
+        {
+          "path": "frontend/src/components/chat/MessageThread.tsx",
+          "operation": "create",
+          "description": "Create chronological message thread view with compose box; trigger refetch/polling to show new messages."
+        },
+        {
+          "path": "frontend/src/hooks/useChat.ts",
+          "operation": "create",
+          "description": "Add React Query hooks for fetching/sending messages with refetch intervals appropriate for polling-based chat."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register chat route(s) and wire dashboard navigation links to open chat."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Client subscription plans page + subscription management UI with consultation quota enforcement messaging and dashboard usage view.",
+      "acceptanceCriteria": [
+        "A pricing/subscription page lists the three client plans with the specified names and prices in GHC.",
+        "Clients can start, change, and cancel a subscription in the app; subscription status is persisted.",
+        "Plan entitlements are enforced at minimum for consultation count per month (Starter: 1 discounted consultation; Professional: 3 consultations/month; Business: unlimited with a fair-use note displayed).",
+        "Client dashboard shows current plan, renewal/status, and usage for the current month."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/subscriptions/ClientPlans.tsx",
+          "operation": "create",
+          "description": "Create client pricing/subscription page listing Starter (GHC 99/month), Professional (GHC 299/month), Business (GHC 899/month) with start/change/cancel controls and fair-use note for Business."
+        },
+        {
+          "path": "frontend/src/components/dashboard/client/SubscriptionPanel.tsx",
+          "operation": "create",
+          "description": "Add client dashboard subscription management panel showing current plan, status, renewal info (as available), and current-month usage/quota progress."
+        },
+        {
+          "path": "frontend/src/components/booking/EntitlementNotice.tsx",
+          "operation": "create",
+          "description": "Display entitlement enforcement messaging in booking flow (quota remaining / requires upgrade) based on subscription state and current-month usage."
+        },
+        {
+          "path": "frontend/src/hooks/useClientSubscription.ts",
+          "operation": "create",
+          "description": "Create hooks for client subscription state + usage and mutations for start/change/cancel; invalidate relevant dashboard/booking queries after changes."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register client subscription/pricing route and wire relevant CTAs from marketing and dashboards."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Lawyer subscription plans page + management UI; show featured/priority placement in directory; basic lawyer analytics panel.",
+      "acceptanceCriteria": [
+        "A pricing/subscription page lists the two lawyer plans with the specified names and prices in GHC.",
+        "Lawyers can start, upgrade/downgrade, and cancel their subscription; status is persisted.",
+        "Directory sorting/visibility reflects Pro benefits (featured/priority placement) in a deterministic way (e.g., featured badge + higher ranking).",
+        "Lawyer dashboard includes a basic analytics section (e.g., profile views count, bookings count, messages count) computed from stored app events."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/subscriptions/LawyerPlans.tsx",
+          "operation": "create",
+          "description": "Create lawyer pricing/subscription page listing Basic (GHC 199/month) and Pro (GHC 499/month) with upgrade/downgrade/cancel actions."
+        },
+        {
+          "path": "frontend/src/components/lawyers/FeaturedBadge.tsx",
+          "operation": "create",
+          "description": "Add a featured/priority indicator UI to render on lawyer cards/profiles when Pro benefits apply; ensure deterministic display."
+        },
+        {
+          "path": "frontend/src/hooks/useLawyerSubscription.ts",
+          "operation": "create",
+          "description": "Create hooks for lawyer subscription state and mutations for plan changes; refresh directory/profile/dashboard after changes."
+        },
+        {
+          "path": "frontend/src/components/dashboard/lawyer/AnalyticsPanel.tsx",
+          "operation": "create",
+          "description": "Add basic analytics UI to lawyer dashboard (profile views, bookings, messages) computed from available stored app data/events."
+        },
+        {
+          "path": "frontend/src/hooks/useLawyers.ts",
+          "operation": "modify",
+          "description": "Update directory sorting logic to reflect Pro priority placement deterministically and display featured badge when applicable."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register lawyer subscription/pricing route and wire dashboard upgrade controls to it."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "In-app recorded payment tracking UI: payment history for clients and earnings summary for lawyers with statuses pending/paid/refunded.",
+      "acceptanceCriteria": [
+        "When a subscription is started/changed or a consultation is booked as paid, a payment record is created and visible in Payment History.",
+        "Client dashboard shows a list of payments with amount (GHC), type (subscription/consultation), date, and status.",
+        "Lawyer dashboard shows an earnings summary derived from paid consultation records."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/dashboard/client/PaymentHistory.tsx",
+          "operation": "create",
+          "description": "Create client payment history view listing recorded payments (amount in GHC, type subscription/consultation, date, status) sourced from backend dashboard data or dedicated capabilities."
+        },
+        {
+          "path": "frontend/src/components/dashboard/lawyer/EarningsSummary.tsx",
+          "operation": "create",
+          "description": "Create lawyer earnings summary UI derived from paid consultation records, including totals and basic breakdown."
+        },
+        {
+          "path": "frontend/src/components/payments/RecordPaymentDialog.tsx",
+          "operation": "create",
+          "description": "Add an in-app 'recorded payment' UI pattern used when starting/changing subscriptions and when marking a consultation as paid, supporting pending/paid/refunded statuses (no external processor)."
+        },
+        {
+          "path": "frontend/src/hooks/usePayments.ts",
+          "operation": "create",
+          "description": "Create hooks to fetch payment history and earnings summary and to record/update payment statuses; invalidate relevant dashboard queries after mutations."
+        },
+        {
+          "path": "frontend/src/components/dashboard/client/SubscriptionPanel.tsx",
+          "operation": "modify",
+          "description": "Wire subscription actions to create/update recorded payment items and reflect resulting status in Payment History (UI integration)."
+        },
+        {
+          "path": "frontend/src/pages/booking/BookConsultation.tsx",
+          "operation": "modify",
+          "description": "Integrate recorded payment flow when booking a paid consultation and ensure resulting payment status is visible in client Payment History and lawyer earnings summary."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Client dashboard with navigation for consultations, chat, payments, subscription management, document vault, and saved lawyers.",
+      "acceptanceCriteria": [
+        "Client dashboard has navigation/tabs for each requested section.",
+        "Saved lawyers: client can save/unsave a lawyer from directory/profile; saved list is persisted.",
+        "Document vault: client can add and view documents; stored items persist and are accessible after refresh (scope to small documents appropriate for canister storage)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/dashboard/ClientDashboard.tsx",
+          "operation": "create",
+          "description": "Create client dashboard container with navigation/tabs for: Upcoming consultations, Chat, Payment history, Subscription management, Document vault, Saved lawyers; show user name + role."
+        },
+        {
+          "path": "frontend/src/components/dashboard/client/SavedLawyers.tsx",
+          "operation": "create",
+          "description": "Implement saved lawyers list UI with save/unsave actions and persistence via backend capabilities."
+        },
+        {
+          "path": "frontend/src/components/documents/DocumentVault.tsx",
+          "operation": "create",
+          "description": "Implement document vault UI for adding/viewing/downloading small items (frontend-only attachments metadata or small text documents) with persistence and refresh survival, constrained to small canister-friendly items."
+        },
+        {
+          "path": "frontend/src/hooks/useSavedLawyers.ts",
+          "operation": "create",
+          "description": "Create hooks for save/unsave and retrieving saved lawyers; integrate with directory/profile save buttons and client dashboard."
+        },
+        {
+          "path": "frontend/src/hooks/useDocuments.ts",
+          "operation": "create",
+          "description": "Create hooks for creating/listing document vault items and retrieving content for view/download while enforcing small-size UX constraints."
+        },
+        {
+          "path": "frontend/src/pages/directory/FindLawyers.tsx",
+          "operation": "modify",
+          "description": "Add save/unsave controls on lawyer cards and reflect saved state in the directory UI."
+        },
+        {
+          "path": "frontend/src/pages/lawyers/LawyerProfile.tsx",
+          "operation": "modify",
+          "description": "Add save/unsave control on the lawyer profile and link to client dashboard saved lawyers section."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register client dashboard route(s) behind RequireAuth + RequireRole(client) and ensure onboarding redirects land here."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Lawyer dashboard with booking calendar, client messages, earnings summary, availability settings, reviews view, and subscription upgrade controls.",
+      "acceptanceCriteria": [
+        "Lawyer dashboard provides access to each requested feature area.",
+        "Availability settings affect what clients see on the lawyer profile and in directory availability filtering.",
+        "Reviews view lists reviews associated with the lawyer profile."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/dashboard/LawyerDashboard.tsx",
+          "operation": "create",
+          "description": "Create lawyer dashboard container with navigation/tabs for: Booking calendar/list, Client messages, Earnings summary, Availability settings, Reviews, Subscription upgrade; show user name + role."
+        },
+        {
+          "path": "frontend/src/components/dashboard/lawyer/ReviewsView.tsx",
+          "operation": "create",
+          "description": "Create reviews view that lists reviews for the logged-in lawyer profile and links back to public profile."
+        },
+        {
+          "path": "frontend/src/components/dashboard/lawyer/AvailabilitySettings.tsx",
+          "operation": "modify",
+          "description": "Wire availability settings to refresh profile and directory data so availability filters and slot lists reflect the latest availability."
+        },
+        {
+          "path": "frontend/src/components/dashboard/lawyer/SubscriptionControls.tsx",
+          "operation": "create",
+          "description": "Add subscription upgrade controls within the lawyer dashboard that link to lawyer plans page and reflect current plan state."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register lawyer dashboard route(s) behind RequireAuth + RequireRole(lawyer) and ensure onboarding redirects land here."
+        }
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "summary": "Reviews system UI: clients submit rating + comment after completed consultation; ratings display on profiles and influence directory filter UI.",
+      "acceptanceCriteria": [
+        "Only clients with a completed consultation can submit a review for that lawyer.",
+        "Lawyer profile shows average rating and a list of reviews.",
+        "Directory rating filter works against the stored average rating."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/reviews/LeaveReviewForm.tsx",
+          "operation": "create",
+          "description": "Create review submission UI (rating + written comment) that is only shown when the client has a completed consultation with the lawyer (based on dashboard/booking status data); calls addReview."
+        },
+        {
+          "path": "frontend/src/pages/lawyers/LawyerProfile.tsx",
+          "operation": "modify",
+          "description": "Integrate reviews list + average rating display and conditionally show the Leave Review form when eligible."
+        },
+        {
+          "path": "frontend/src/pages/directory/FindLawyers.tsx",
+          "operation": "modify",
+          "description": "Ensure rating filter UI applies against stored rating data derived from profiles/reviews and updates results when changed."
+        },
+        {
+          "path": "frontend/src/hooks/useReviews.ts",
+          "operation": "create",
+          "description": "Add hooks for submitting a review and invalidating/refetching lawyer profile and directory data to reflect updated ratings."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Join as a Lawyer flow UI that creates a lawyer profile for logged-in users and routes to lawyer dashboard management.",
+      "acceptanceCriteria": [
+        "On first run, the directory shows multiple lawyers with varied attributes enabling filter testing.",
+        "“Join as a Lawyer” allows a signed-in user to create their lawyer profile and then manage it from the lawyer dashboard.",
+        "A lawyer profile includes at least: display name, bio, credentials, practice areas, languages, location, years of experience, consultation fee, and profile photo (upload or default)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/lawyers/JoinAsLawyer.tsx",
+          "operation": "create",
+          "description": "Create minimal Join as a Lawyer flow that requires login, collects required profile fields, uses default/placeholder profile photo if not uploaded, and calls createLawyerProfile then routes to lawyer dashboard."
+        },
+        {
+          "path": "frontend/src/components/lawyers/LawyerProfileEditor.tsx",
+          "operation": "create",
+          "description": "Create lawyer profile editor form for managing fields (display name, bio, credentials, practice areas, languages, location, years of experience, consultation fee, profile photo) and updating via updateLawyerProfile as appropriate."
+        },
+        {
+          "path": "frontend/src/hooks/useLawyerProfile.ts",
+          "operation": "create",
+          "description": "Add hooks for creating/updating lawyer profile and loading lawyer dashboard data; ensure directory/profile refetch after updates."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "modify",
+          "description": "Register Join as a Lawyer route and wire homepage CTA to this flow; ensure appropriate gating (login required and role selection where applicable)."
+        },
+        {
+          "path": "frontend/src/components/lawyers/LawyerCard.tsx",
+          "operation": "modify",
+          "description": "Use the generated placeholder avatar when a lawyer profile photo is missing by referencing frontend/public/assets/generated/lawyer-avatar-placeholder.dim_512x512.png."
+        }
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "summary": "Add generated brand assets (logo + illustrations) as static frontend assets and render them in marketing/auth UI.",
+      "acceptanceCriteria": [
+        "Generated images are present under frontend/public/assets/generated and are referenced by the marketing homepage and/or auth pages.",
+        "Assets load correctly in the built app without any backend image serving."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/lawconnect-logo.dim_512x256.png",
+          "operation": "create",
+          "description": "Add generated brand image asset as a static file at the required path."
+        },
+        {
+          "path": "frontend/public/assets/generated/lawconnect-hero-illustration.dim_1600x900.png",
+          "operation": "create",
+          "description": "Add generated hero illustration asset as a static file at the required path."
+        },
+        {
+          "path": "frontend/public/assets/generated/lawyer-avatar-placeholder.dim_512x512.png",
+          "operation": "create",
+          "description": "Add generated lawyer avatar placeholder asset as a static file at the required path."
+        },
+        {
+          "path": "frontend/public/assets/generated/client-avatar-placeholder.dim_512x512.png",
+          "operation": "create",
+          "description": "Add generated client avatar placeholder asset as a static file at the required path."
+        },
+        {
+          "path": "frontend/src/pages/marketing/Home.tsx",
+          "operation": "modify",
+          "description": "Reference and render frontend/public/assets/generated/lawconnect-logo.dim_512x256.png and frontend/public/assets/generated/lawconnect-hero-illustration.dim_1600x900.png within the homepage hero/branding sections."
+        },
+        {
+          "path": "frontend/src/components/nav/PublicHeader.tsx",
+          "operation": "create",
+          "description": "Create public header that renders the brand logo from frontend/public/assets/generated/lawconnect-logo.dim_512x256.png and includes navigation + CTAs."
+        },
+        {
+          "path": "frontend/src/pages/auth/ProfileSetup.tsx",
+          "operation": "modify",
+          "description": "Reference and render frontend/public/assets/generated/client-avatar-placeholder.dim_512x512.png in the profile setup UI (e.g., avatar placeholder) to reinforce branding."
+        }
+      ]
+    }
+  ]
+}

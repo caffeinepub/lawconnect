@@ -1,0 +1,335 @@
+{
+  "kind": "build_request",
+  "title": "Build LawConnect SaaS MVP (lawyer directory, profiles, booking, chat, subscriptions, dashboards)",
+  "projectName": "LawConnect",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement Internet Identity sign-in and an onboarding step that lets a logged-in user choose an account type (Client or Lawyer), then route them to the correct dashboard and permissions throughout the app.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "A subscription platform where individuals and businesses can: Find verified lawyers; Chat with lawyers; Book consultations; Subscribe for ongoing legal support",
+          "👤 Client Dashboard ... 👨🏾‍⚖️ Lawyer Dashboard ..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can sign in with Internet Identity.",
+        "After first sign-in, users must select exactly one role: Client or Lawyer.",
+        "Users can later view their role on their dashboard; role-gated pages/actions are not accessible from the wrong role (e.g., only lawyers can edit availability)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Create the public marketing website pages and sections for LawConnect: Homepage with hero + CTAs (“Find a Lawyer”, “Join as a Lawyer”), How It Works (3 steps), subscription plans preview (client + lawyer), testimonials section (static seed data), a “For Businesses” section, and a final CTA section.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "🏠 Homepage Sections: Hero Section ... CTA: Find a Lawyer; Join as a Lawyer ... How It Works (3 Steps) ... Subscription Plans Preview ... Testimonials ... For Businesses Section ... Final CTA"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Homepage renders all requested sections with clear headings and CTAs in English.",
+        "Buttons navigate to the corresponding flows/pages (Find a Lawyer, Join as a Lawyer).",
+        "Testimonials display from seeded static data (no admin UI required)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement a coherent, distinctive visual theme for LawConnect and apply it consistently across marketing pages, directory, profiles, and dashboards (colors, typography, spacing, component styles). Avoid a blue/purple dominant palette.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "SaaS Concept: “LawConnect” (Working Name)",
+          "Use English for any user-facing text in the build request."
+        ]
+      },
+      "acceptanceCriteria": [
+        "A consistent theme is applied across the app (marketing + authenticated areas).",
+        "Primary/secondary colors are not predominantly blue/purple.",
+        "Buttons, forms, cards, and navigation share consistent styling."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Build the “Find a Lawyer” directory page with filters (practice area, location, experience level, language, rating, availability: Today/This Week) and a lawyer card UI that shows profile photo, years of experience, specialization, consultation fee, an availability indicator/button, and a “Subscribe & Book” CTA linking into the booking flow.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "🔎 Find a Lawyer Page Filters: Practice Area ... Location ... Experience level ... Language ... Rating ... Availability (Today / This Week)",
+          "Lawyer Card Includes: Profile photo ... Years of experience ... Specialization ... Consultation fee ... Availability button ... “Subscribe & Book” CTA"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Directory page lists lawyers from backend data and updates results when filters change.",
+        "Each lawyer card displays the requested fields and links to the lawyer profile page.",
+        "Availability filter (Today/This Week) affects results based on the lawyer’s published availability slots."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement verified lawyer profiles with: bio, credentials, areas of expertise, reviews, consultation fee, and a list of available time slots; include CTAs to book a consultation and to subscribe for ongoing support.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "👨🏾‍⚖️ Lawyer Profile Page Includes: Bio; Credentials; Areas of expertise; Reviews; Available time slots; Book consultation button; Subscribe for ongoing support button"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Lawyer profile page loads from backend by lawyer id and shows all requested sections.",
+        "Available time slots are shown and can be selected to start a booking.",
+        "Reviews render from backend seed/user-submitted data (see reviews requirement)."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement the consultation booking system: lawyers can define availability slots; clients can pick a slot, create a booking, and see booking status. Prevent double-booking of the same slot.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Book consultations",
+          "Lawyer Dashboard Features: Booking calendar ... Availability settings",
+          "Client Dashboard Features: Upcoming consultations"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Lawyers can create/update/remove their availability slots (date/time + duration).",
+        "Clients can book an available slot with a selected lawyer; the slot becomes unavailable once booked.",
+        "Client dashboard lists upcoming consultations with date/time, lawyer name, and status.",
+        "Lawyer dashboard shows upcoming bookings in a calendar/list view."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Implement in-app 1:1 messaging between a client and a lawyer that is scoped to a relationship created by a booking (or an explicit client-lawyer connection) and is accessible from both dashboards.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Chat with lawyers",
+          "👤 Client Dashboard Features: Chat with lawyer",
+          "👨🏾‍⚖️ Lawyer Dashboard Features: Client messages"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clients can open a conversation with a lawyer they have a booking/connection with and send messages.",
+        "Lawyers can view conversations with clients and reply.",
+        "Messages persist in backend storage and load in chronological order."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement client subscription plans and entitlements: Starter (GHC 99/month), Professional (GHC 299/month), Business (GHC 899/month), including subscription management UI and enforcement of consultation quotas/benefits where applicable.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "For Clients 🟢 Starter – GHC 99/month ... 🔵 Professional – GHC 299/month ... 🟣 Business – GHC 899/month",
+          "Client Subscriptions: Basic ... Premium ... Business Plan ...",
+          "👤 Client Dashboard Features: Subscription management; Payment history"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A pricing/subscription page lists the three client plans with the specified names and prices in GHC.",
+        "Clients can start, change, and cancel a subscription in the app; subscription status is persisted.",
+        "Plan entitlements are enforced at minimum for consultation count per month (Starter: 1 discounted consultation; Professional: 3 consultations/month; Business: unlimited with a fair-use note displayed).",
+        "Client dashboard shows current plan, renewal/status, and usage for the current month."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Implement lawyer subscription plans: Basic (GHC 199/month) and Pro (GHC 499/month), including subscription management, featured listing/priority placement flags for Pro, and a minimal analytics view for lawyers.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "For Lawyers 🟢 Basic – GHC 199/month ... 🔵 Pro – GHC 499/month",
+          "Lawyer Subscriptions: Pay monthly to be listed; Featured listing upgrade; Pay-per-lead option",
+          "👨🏾‍⚖️ Lawyer Dashboard Features: Subscription upgrade; Analytics dashboard; Lead notifications"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A pricing/subscription page lists the two lawyer plans with the specified names and prices in GHC.",
+        "Lawyers can start, upgrade/downgrade, and cancel their subscription; status is persisted.",
+        "Directory sorting/visibility reflects Pro benefits (featured/priority placement) in a deterministic way (e.g., featured badge + higher ranking).",
+        "Lawyer dashboard includes a basic analytics section (e.g., profile views count, bookings count, messages count) computed from stored app events."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Add payment record tracking for subscriptions and consultations, including a Payment History view in the client dashboard and earnings summary in the lawyer dashboard. Use an in-app “recorded payment” flow (no external processor integration) with clear statuses (pending/paid/refunded).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Payments support for consultations and subscription billing",
+          "👤 Client Dashboard Features: Payment history",
+          "👨🏾‍⚖️ Lawyer Dashboard Features: Earnings summary"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When a subscription is started/changed or a consultation is booked as paid, a payment record is created and visible in Payment History.",
+        "Client dashboard shows a list of payments with amount (GHC), type (subscription/consultation), date, and status.",
+        "Lawyer dashboard shows an earnings summary derived from paid consultation records."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Support an optional commission model on paid consultations with a configurable commission rate between 10% and 20%, and reflect commission deductions in the lawyer earnings summary.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Commission Model (Optional) 10–20% commission per paid consultation"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores a commission rate setting (bounded to 10–20%).",
+        "For each paid consultation, the platform commission and net earnings are computed and persisted.",
+        "Lawyer earnings summary displays gross, commission, and net totals for a selected time range (at least current month)."
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Implement client dashboard features: upcoming consultations, chat access, payment history, subscription management, document vault (upload/store/download files as frontend-only attachments metadata or small text documents), and saved lawyers.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "👤 Client Dashboard Features: Upcoming consultations; Chat with lawyer; Payment history; Subscription management; Document vault; Saved lawyers"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Client dashboard has navigation/tabs for each requested section.",
+        "Saved lawyers: client can save/unsave a lawyer from directory/profile; saved list is persisted.",
+        "Document vault: client can add and view documents; stored items persist and are accessible after refresh (scope to small documents appropriate for canister storage)."
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Implement lawyer dashboard features: booking calendar, client messages, earnings summary, availability settings, reviews view, and subscription upgrade controls.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "👨🏾‍⚖️ Lawyer Dashboard Features: Booking calendar; Client messages; Earnings summary; Availability settings; Reviews; Subscription upgrade"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Lawyer dashboard provides access to each requested feature area.",
+        "Availability settings affect what clients see on the lawyer profile and in directory availability filtering.",
+        "Reviews view lists reviews associated with the lawyer profile."
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Add a reviews system: clients can leave a rating and written review for a lawyer after a completed consultation; ratings contribute to the lawyer’s displayed rating and directory filter.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Find a Lawyer Page Filters: Rating",
+          "Lawyer Profile Page Includes: Reviews"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Only clients with a completed consultation can submit a review for that lawyer.",
+        "Lawyer profile shows average rating and a list of reviews.",
+        "Directory rating filter works against the stored average rating."
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Seed the backend with example lawyers (with practice areas, locations, languages, experience, fees, sample availability) so the directory and profile pages are usable without manual data entry, and provide a minimal “Join as a Lawyer” flow that creates a lawyer profile for the logged-in lawyer account.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "CTA: Join as a Lawyer",
+          "Find verified lawyers",
+          "Lawyer Dashboard ... manage profiles and accept bookings"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On first run, the directory shows multiple lawyers with varied attributes enabling filter testing.",
+        "“Join as a Lawyer” allows a signed-in user to create their lawyer profile and then manage it from the lawyer dashboard.",
+        "A lawyer profile includes at least: display name, bio, credentials, practice areas, languages, location, years of experience, consultation fee, and profile photo (upload or default)."
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Add static generated brand assets (logo and simple UI illustrations) and render them from the frontend as static assets under frontend/public/assets/generated.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "SaaS Concept: “LawConnect” (Working Name)",
+          "Tagline: “Legal help, simplified.”"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images are present under frontend/public/assets/generated and are referenced by the marketing homepage and/or auth pages.",
+        "Assets load correctly in the built app without any backend image serving."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use English for all user-facing text.",
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo); only add backend/migration.mo if upgrading existing stable state requires it.",
+    "Do not edit files under frontend/src/components/ui or any other immutable paths listed in SYSTEM_CONTEXT; compose them instead."
+  ],
+  "nonGoals": [
+    "Real payment processing integration (cards, mobile money, Stripe checkout) is out of scope; track payments as in-app records only.",
+    "Real-time messaging via WebSockets/push notifications is out of scope; chat should work via polling/refetch patterns suitable for React Query.",
+    "Complex document storage for large files is out of scope; keep document vault limited to small items compatible with canister storage.",
+    "External lawyer verification/KYC workflows are out of scope; represent “verified” as an app-managed flag."
+  ],
+  "imageRequirements": {
+    "required": [
+      "LawConnect wordmark logo, modern legal aesthetic, light background (lawconnect-logo.dim_512x256.png)",
+      "Homepage hero illustration, abstract legal/help theme, warm neutral palette (lawconnect-hero-illustration.dim_1600x900.png)",
+      "Simple lawyer avatar placeholder illustration, neutral tones (lawyer-avatar-placeholder.dim_512x512.png)",
+      "Simple client avatar placeholder illustration, neutral tones (client-avatar-placeholder.dim_512x512.png)"
+    ],
+    "edits": []
+  }
+}

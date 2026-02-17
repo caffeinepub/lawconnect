@@ -1,0 +1,187 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-17T15:59:58.782Z",
+  "summary": "Diff adds a new Motoko backend actor with user profile/role onboarding and some lawyer directory/booking/dashboard scaffolding, plus a new React app with routing, Internet Identity hooks, role-guarded routes, basic marketing layout/navigation, a directory page with limited filters, and basic dashboards. Many MVP requirements (full directory filters, profiles, availability management, real chat, subscriptions/entitlements, payments/commission, reviews submission, saved lawyers persistence, document vault) are not evidenced in the provided diff summary.",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Homepage renders hero + CTAs, How It Works (3 steps), subscription plans preview, testimonials (seeded static data), For Businesses section, and final CTA; CTAs navigate correctly.",
+      "reason": "Home page implementation is not shown in the diff summary; only the route import exists, so required sections/CTAs/testimonials cannot be verified from the provided evidence.",
+      "evidence": [
+        "frontend/src/App.tsx (routes to ./pages/marketing/Home; Home content not shown)"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Directory filters: practice area, location, experience level, language, rating, availability (Today/This Week) and lawyer cards showing profile photo, years experience, specialization, consultation fee, availability indicator/button, and “Subscribe & Book” CTA; availability filter must be based on published availability slots.",
+      "reason": "Directory page evidence shows only search, practice area, and minimum rating filtering in the frontend; no location/experience/language filters; no availability Today/This Week filter; no proof of slot-based availability filtering or required card fields/CTA.",
+      "evidence": [
+        "frontend/src/pages/directory/FindLawyers.tsx (filters shown: searchTerm, practiceArea, minRating; no availability/location/language/experience filters evidenced)"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Verified lawyer profile page with bio, credentials, areas of expertise, reviews, consultation fee, available time slots, and CTAs to book and subscribe.",
+      "reason": "LawyerProfile route exists, but no LawyerProfile page content is included in the diff summary, so required sections/CTAs/slots cannot be verified.",
+      "evidence": [
+        "frontend/src/App.tsx (imports ./pages/lawyers/LawyerProfile; file not shown)"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "requirement": "Availability slots management by lawyers (create/update/remove) and booking system based on those slots with double-booking prevention; dashboards show upcoming consultations/bookings in list/calendar views.",
+      "reason": "Booking UI shown uses free date/time input rather than selecting from lawyer-published availability slots; no evidence of lawyer availability CRUD UI. Backend booking/double-booking logic and dashboard calendar/list requirements cannot be verified from truncated backend and truncated dashboards.",
+      "evidence": [
+        "frontend/src/pages/booking/BookConsultation.tsx (manual date/time inputs; no selection from backend-provided available slots evidenced)",
+        "frontend/src/pages/dashboard/LawyerDashboard.tsx (dashboard exists but truncated; no availability settings/calendar UI evidenced)",
+        "backend/main.mo (truncated; cannot confirm slot storage, availability CRUD, or double-booking enforcement)"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "In-app 1:1 messaging persisted in backend, scoped to booking/connection, accessible from both dashboards, chronological message loading (polling/refetch acceptable).",
+      "reason": "Chat page is explicitly a placeholder (“Chat Feature Coming Soon”) and there is no evidence of backend message types/storage/APIs or relationship scoping.",
+      "evidence": [
+        "frontend/src/pages/chat/Chat.tsx (placeholder, no chat functionality)",
+        "backend/main.mo (truncated; no messaging types/APIs evidenced)"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "requirement": "Client subscription plans (Starter GHC 99, Professional GHC 299, Business GHC 899) with subscription management UI, persisted status, and enforced consultation quotas/benefits; dashboard shows plan/renewal/status and monthly usage.",
+      "reason": "Routes exist for ClientPlans, but no plan page content, subscription state persistence, enforcement logic, or dashboard plan/usage sections are evidenced.",
+      "evidence": [
+        "frontend/src/App.tsx (imports ./pages/subscriptions/ClientPlans; file not shown)",
+        "frontend/src/pages/dashboard/ClientDashboard.tsx (tabs shown, but no subscription management/usage enforcement evidenced in provided excerpt)",
+        "backend/main.mo (truncated; no subscription storage/entitlements enforcement evidenced)"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "Lawyer plans (Basic GHC 199, Pro GHC 499) with management UI and persistence; Pro featured/priority placement reflected deterministically; lawyer analytics view computed from stored app events.",
+      "reason": "Frontend does sort by `status === 'pro'` in the directory, but no evidence of plan pricing page content, subscription management/persistence, featured badge, or analytics derived from stored events.",
+      "evidence": [
+        "frontend/src/pages/directory/FindLawyers.tsx (sorts pro above others but no badge/plan management/analytics evidenced)",
+        "frontend/src/App.tsx (imports ./pages/subscriptions/LawyerPlans; file not shown)",
+        "backend/main.mo (truncated; no subscription persistence or analytics event tracking evidenced)"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "requirement": "Payment record tracking (pending/paid/refunded) for subscriptions and consultations; Payment History in client dashboard; lawyer earnings summary derived from paid consultation records; recorded payment flow (no external processor).",
+      "reason": "Client dashboard has a Payments tab, but no evidence of payment record creation/storage/statuses, payment history listing fields, or backend logic. Lawyer dashboard computes earnings as sum of completed booking fees, not from payment records with statuses.",
+      "evidence": [
+        "frontend/src/pages/dashboard/ClientDashboard.tsx (Payments tab exists; no payment record list evidenced in excerpt)",
+        "frontend/src/pages/dashboard/LawyerDashboard.tsx (earnings computed from bookings with status 'completed'; no payment records/statuses evidenced)",
+        "backend/main.mo (truncated; no payment record types/APIs evidenced)"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "requirement": "Commission model for paid consultations with configurable rate (10–20%) stored in backend; commission and net earnings persisted; lawyer earnings summary shows gross/commission/net for at least current month.",
+      "reason": "No evidence of commission rate storage, bounds enforcement, payment computations, or gross/commission/net breakdown in dashboard.",
+      "evidence": [
+        "backend/main.mo (truncated; no commission settings/types/APIs evidenced)",
+        "frontend/src/pages/dashboard/LawyerDashboard.tsx (shows Total Earnings only; no commission breakdown evidenced)"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Client dashboard: upcoming consultations, chat access, payment history, subscription management, document vault (persisted small docs), and saved lawyers (persisted save/unsave from directory/profile).",
+      "reason": "Tabs exist for consultations/chat/payments/documents/saved, but chat is a placeholder page and there is no evidence of document vault persistence, saved lawyers save/unsave actions, or payment history implementation.",
+      "evidence": [
+        "frontend/src/pages/dashboard/ClientDashboard.tsx (tabs present; implementation truncated and does not evidence document vault/saved lawyers actions/persistence)",
+        "frontend/src/pages/chat/Chat.tsx (placeholder)",
+        "backend/main.mo (truncated; no document vault or saved lawyers APIs evidenced)"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "Lawyer dashboard: booking calendar, client messages, earnings summary, availability settings, reviews view, and subscription upgrade controls; availability affects directory/profile availability filtering.",
+      "reason": "Lawyer dashboard shows summary cards and an Upgrade Plan link, but no evidence of booking calendar, messages UI, availability settings UI, or reviews view; no evidence availability affects directory filtering.",
+      "evidence": [
+        "frontend/src/pages/dashboard/LawyerDashboard.tsx (truncated; no calendar/messages/availability/reviews sections evidenced)",
+        "frontend/src/pages/directory/FindLawyers.tsx (no availability filtering evidenced)"
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "requirement": "Reviews system: only clients with completed consultation can submit rating + written review; lawyer profile shows average rating + reviews; directory rating filter uses stored average rating.",
+      "reason": "Directory uses reviews array to compute avg rating for filtering, but there is no evidence of a review submission flow, permission checks tied to completed consultations, or backend persistence/validation logic.",
+      "evidence": [
+        "frontend/src/pages/directory/FindLawyers.tsx (computes avg rating from `lawyer.reviews`; no submission flow)",
+        "backend/main.mo (truncated; cannot verify review submission authorization and persistence)"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "requirement": "Seed backend with example lawyers (varied attributes + sample availability) and provide Join as a Lawyer flow that creates a lawyer profile for logged-in lawyer; profile includes required fields + photo (upload or default).",
+      "reason": "JoinAsLawyer route exists but its implementation is not shown; backend seeding and sample availability are not verifiable from the truncated backend excerpt.",
+      "evidence": [
+        "frontend/src/App.tsx (imports ./pages/lawyers/JoinAsLawyer; file not shown)",
+        "backend/main.mo (truncated; cannot confirm seeded lawyers or availability slots)"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "requirement": "Add generated brand assets under frontend/public/assets/generated (logo + hero illustration + avatar placeholders) and reference them from marketing homepage and/or auth pages.",
+      "reason": "ProfileSetup references the logo path, but the diff summary does not show the generated image files under frontend/public/assets/generated (omitted files are mentioned but not enumerated), and no evidence is provided for hero illustration or avatar placeholders being present and referenced.",
+      "evidence": [
+        "frontend/src/pages/auth/ProfileSetup.tsx (references /assets/generated/lawconnect-logo.dim_512x256.png)",
+        "file-diff summary (Omitted files due to limits: added=12; assets not listed)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Admin-token-based access control initialization via a secret URL parameter (caffeineAdminToken) and backend `_initializeAccessControlWithSecret` call.",
+      "reason": "BuildRequest does not mention an admin secret token mechanism or URL-parameter-based elevation; it only specifies Internet Identity sign-in and role onboarding.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts (reads `caffeineAdminToken` from URL and calls actor._initializeAccessControlWithSecret)"
+      ]
+    },
+    {
+      "description": "Caffeine.ai promotional footer link and attribution text.",
+      "reason": "BuildRequest does not request third-party promotional branding or outbound referral links in the footer.",
+      "evidence": [
+        "frontend/src/components/nav/PublicFooter.tsx (\"Built with ... using caffeine.ai\" link)"
+      ]
+    }
+  ],
+  "confidence": 0.66,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/auth/RequireAuth.tsx",
+    "frontend/src/components/auth/RequireRole.tsx",
+    "frontend/src/components/layout/AppLayout.tsx",
+    "frontend/src/components/layout/PublicLayout.tsx",
+    "frontend/src/components/nav/PublicFooter.tsx",
+    "frontend/src/components/nav/PublicHeader.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/auth/OnboardingRole.tsx",
+    "frontend/src/pages/auth/ProfileSetup.tsx",
+    "frontend/src/pages/booking/BookConsultation.tsx",
+    "frontend/src/pages/chat/Chat.tsx",
+    "frontend/src/pages/dashboard/ClientDashboard.tsx",
+    "frontend/src/pages/dashboard/LawyerDashboard.tsx",
+    "frontend/src/pages/directory/FindLawyers.tsx",
+    "frontend/src/pages/lawyers/JoinAsLawyer.tsx",
+    "frontend/src/pages/lawyers/LawyerProfile.tsx",
+    "frontend/src/pages/marketing/Home.tsx",
+    "frontend/src/pages/subscriptions/ClientPlans.tsx",
+    "frontend/src/pages/subscriptions/LawyerPlans.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

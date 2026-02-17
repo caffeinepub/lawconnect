@@ -1,0 +1,302 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-internet-identity-sign-in-and-an-onboarding-step-that-lets-a-logged-in-user-choose-an-account-type-client-or-lawyer-then-route-them-to-the-correct-dashboard-and-permissions-throughout-the-app",
+      "featureTitle": "Implement Internet Identity sign-in and an onboarding step that lets a logged-in user choose an account type (Client or Lawyer), then route them to the correct dashboard and permissions throughout the app.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/RequireAuth.tsx",
+        "frontend/src/components/auth/RequireRole.tsx",
+        "frontend/src/pages/auth/OnboardingRole.tsx",
+        "frontend/src/pages/auth/ProfileSetup.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-the-public-marketing-website-pages-and-sections-for-lawconnect-homepage-with-hero-ctas-find-a-lawyer-join-as-a-lawyer-how-it-works-3-steps-subscription-plans-preview-client-lawyer-testimonials-section-static-seed-data-a-for-businesses-section-and-a-final-cta-section",
+      "featureTitle": "Create the public marketing website pages and sections for LawConnect: Homepage with hero + CTAs (“Find a Lawyer”, “Join as a Lawyer”), How It Works (3 steps), subscription plans preview (client + lawyer), testimonials section (static seed data), a “For Businesses” section, and a final CTA section.",
+      "files": [
+        "frontend/src/components/layout/PublicLayout.tsx",
+        "frontend/src/pages/marketing/Home.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-coherent-distinctive-visual-theme-for-lawconnect-and-apply-it-consistently-across-marketing-pages-directory-profiles-and-dashboards-colors-typography-spacing-component-styles-avoid-a-blue-purple-dominant-palette",
+      "featureTitle": "Implement a coherent, distinctive visual theme for LawConnect and apply it consistently across marketing pages, directory, profiles, and dashboards (colors, typography, spacing, component styles). Avoid a blue/purple dominant palette.",
+      "files": [
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-find-a-lawyer-directory-page-with-filters-practice-area-location-experience-level-language-rating-availability-today-this-week-and-a-lawyer-card-ui-that-shows-profile-photo-years-of-experience-specialization-consultation-fee-an-availability-indicator-button-and-a-subscribe-book-cta-linking-into-the-booking-flow",
+      "featureTitle": "Build the “Find a Lawyer” directory page with filters (practice area, location, experience level, language, rating, availability: Today/This Week) and a lawyer card UI that shows profile photo, years of experience, specialization, consultation fee, an availability indicator/button, and a “Subscribe & Book” CTA linking into the booking flow.",
+      "files": [
+        "frontend/src/pages/directory/FindLawyers.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-verified-lawyer-profiles-with-bio-credentials-areas-of-expertise-reviews-consultation-fee-and-a-list-of-available-time-slots-include-ctas-to-book-a-consultation-and-to-subscribe-for-ongoing-support",
+      "featureTitle": "Implement verified lawyer profiles with: bio, credentials, areas of expertise, reviews, consultation fee, and a list of available time slots; include CTAs to book a consultation and to subscribe for ongoing support.",
+      "files": [
+        "frontend/src/pages/lawyers/LawyerProfile.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-consultation-booking-system-lawyers-can-define-availability-slots-clients-can-pick-a-slot-create-a-booking-and-see-booking-status-prevent-double-booking-of-the-same-slot",
+      "featureTitle": "Implement the consultation booking system: lawyers can define availability slots; clients can pick a slot, create a booking, and see booking status. Prevent double-booking of the same slot.",
+      "files": [
+        "frontend/src/pages/booking/BookConsultation.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-in-app-1-1-messaging-between-a-client-and-a-lawyer-that-is-scoped-to-a-relationship-created-by-a-booking-or-an-explicit-client-lawyer-connection-and-is-accessible-from-both-dashboards",
+      "featureTitle": "Implement in-app 1:1 messaging between a client and a lawyer that is scoped to a relationship created by a booking (or an explicit client-lawyer connection) and is accessible from both dashboards.",
+      "files": [
+        "frontend/src/pages/chat/Chat.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-client-subscription-plans-and-entitlements-starter-ghc-99-month-professional-ghc-299-month-business-ghc-899-month-including-subscription-management-ui-and-enforcement-of-consultation-quotas-benefits-where-applicable",
+      "featureTitle": "Implement client subscription plans and entitlements: Starter (GHC 99/month), Professional (GHC 299/month), Business (GHC 899/month), including subscription management UI and enforcement of consultation quotas/benefits where applicable.",
+      "files": [
+        "frontend/src/pages/subscriptions/ClientPlans.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-lawyer-subscription-plans-basic-ghc-199-month-and-pro-ghc-499-month-including-subscription-management-featured-listing-priority-placement-flags-for-pro-and-a-minimal-analytics-view-for-lawyers",
+      "featureTitle": "Implement lawyer subscription plans: Basic (GHC 199/month) and Pro (GHC 499/month), including subscription management, featured listing/priority placement flags for Pro, and a minimal analytics view for lawyers.",
+      "files": [
+        "frontend/src/pages/subscriptions/LawyerPlans.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-payment-record-tracking-for-subscriptions-and-consultations-including-a-payment-history-view-in-the-client-dashboard-and-earnings-summary-in-the-lawyer-dashboard-use-an-in-app-recorded-payment-flow-no-external-processor-integration-with-clear-statuses-pending-paid-refunded",
+      "featureTitle": "Add payment record tracking for subscriptions and consultations, including a Payment History view in the client dashboard and earnings summary in the lawyer dashboard. Use an in-app “recorded payment” flow (no external processor integration) with clear statuses (pending/paid/refunded).",
+      "files": [
+        "frontend/src/pages/booking/BookConsultation.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-client-dashboard-features-upcoming-consultations-chat-access-payment-history-subscription-management-document-vault-upload-store-download-files-as-frontend-only-attachments-metadata-or-small-text-documents-and-saved-lawyers",
+      "featureTitle": "Implement client dashboard features: upcoming consultations, chat access, payment history, subscription management, document vault (upload/store/download files as frontend-only attachments metadata or small text documents), and saved lawyers.",
+      "files": [
+        "frontend/src/pages/dashboard/ClientDashboard.tsx",
+        "frontend/src/pages/directory/FindLawyers.tsx",
+        "frontend/src/pages/lawyers/LawyerProfile.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-lawyer-dashboard-features-booking-calendar-client-messages-earnings-summary-availability-settings-reviews-view-and-subscription-upgrade-controls",
+      "featureTitle": "Implement lawyer dashboard features: booking calendar, client messages, earnings summary, availability settings, reviews view, and subscription upgrade controls.",
+      "files": [
+        "frontend/src/pages/dashboard/LawyerDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-reviews-system-clients-can-leave-a-rating-and-written-review-for-a-lawyer-after-a-completed-consultation-ratings-contribute-to-the-lawyer-s-displayed-rating-and-directory-filter",
+      "featureTitle": "Add a reviews system: clients can leave a rating and written review for a lawyer after a completed consultation; ratings contribute to the lawyer’s displayed rating and directory filter.",
+      "files": [
+        "frontend/src/pages/directory/FindLawyers.tsx",
+        "frontend/src/pages/lawyers/LawyerProfile.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-seed-the-backend-with-example-lawyers-with-practice-areas-locations-languages-experience-fees-sample-availability-so-the-directory-and-profile-pages-are-usable-without-manual-data-entry-and-provide-a-minimal-join-as-a-lawyer-flow-that-creates-a-lawyer-profile-for-the-logged-in-lawyer-account",
+      "featureTitle": "Seed the backend with example lawyers (with practice areas, locations, languages, experience, fees, sample availability) so the directory and profile pages are usable without manual data entry, and provide a minimal “Join as a Lawyer” flow that creates a lawyer profile for the logged-in lawyer account.",
+      "files": [
+        "frontend/src/pages/lawyers/JoinAsLawyer.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-static-generated-brand-assets-logo-and-simple-ui-illustrations-and-render-them-from-the-frontend-as-static-assets-under-frontend-public-assets-generated",
+      "featureTitle": "Add static generated brand assets (logo and simple UI illustrations) and render them from the frontend as static assets under frontend/public/assets/generated.",
+      "files": [
+        "frontend/src/components/nav/PublicHeader.tsx",
+        "frontend/src/pages/auth/ProfileSetup.tsx",
+        "frontend/src/pages/marketing/Home.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-16"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

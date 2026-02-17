@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "LawConnect: a subscription-based legal services SaaS where clients/businesses find verified lawyers, chat, and book consultations; lawyers subscribe to be listed, manage profiles/availability, receive leads, and handle bookings, with optional commission on consultations.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- LawConnect wordmark logo, modern legal aesthetic, light background (lawconnect-logo.dim_512x256.png)\n- Homepage hero illustration, abstract legal/help theme, warm neutral palette (lawconnect-hero-illustration.dim_1600x900.png)\n- Simple lawyer avatar placeholder illustration, neutral tones (lawyer-avatar-placeholder.dim_512x512.png)\n- Simple client avatar placeholder illustration, neutral tones (client-avatar-placeholder.dim_512x512.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-internet-identity-sign-in-and-an-onboarding-step-that-lets-a-logged-in-user-choose-an-account-type-client-or-lawyer-then-route-them-to-the-correct-dashboard-and-permissions-throughout-the-app",
+      "title": "Implement Internet Identity sign-in and an onboarding step that lets a logged-in user choose an account type (Client or Lawyer), then route them to the correct dashboard and permissions throughout the app.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-the-public-marketing-website-pages-and-sections-for-lawconnect-homepage-with-hero-ctas-find-a-lawyer-join-as-a-lawyer-how-it-works-3-steps-subscription-plans-preview-client-lawyer-testimonials-section-static-seed-data-a-for-businesses-section-and-a-final-cta-section",
+      "title": "Create the public marketing website pages and sections for LawConnect: Homepage with hero + CTAs (“Find a Lawyer”, “Join as a Lawyer”), How It Works (3 steps), subscription plans preview (client + lawyer), testimonials section (static seed data), a “For Businesses” section, and a final CTA section.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-coherent-distinctive-visual-theme-for-lawconnect-and-apply-it-consistently-across-marketing-pages-directory-profiles-and-dashboards-colors-typography-spacing-component-styles-avoid-a-blue-purple-dominant-palette",
+      "title": "Implement a coherent, distinctive visual theme for LawConnect and apply it consistently across marketing pages, directory, profiles, and dashboards (colors, typography, spacing, component styles). Avoid a blue/purple dominant palette.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-find-a-lawyer-directory-page-with-filters-practice-area-location-experience-level-language-rating-availability-today-this-week-and-a-lawyer-card-ui-that-shows-profile-photo-years-of-experience-specialization-consultation-fee-an-availability-indicator-button-and-a-subscribe-book-cta-linking-into-the-booking-flow",
+      "title": "Build the “Find a Lawyer” directory page with filters (practice area, location, experience level, language, rating, availability: Today/This Week) and a lawyer card UI that shows profile photo, years of experience, specialization, consultation fee, an availability indicator/button, and a “Subscribe & Book” CTA linking into the booking flow.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-verified-lawyer-profiles-with-bio-credentials-areas-of-expertise-reviews-consultation-fee-and-a-list-of-available-time-slots-include-ctas-to-book-a-consultation-and-to-subscribe-for-ongoing-support",
+      "title": "Implement verified lawyer profiles with: bio, credentials, areas of expertise, reviews, consultation fee, and a list of available time slots; include CTAs to book a consultation and to subscribe for ongoing support.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-consultation-booking-system-lawyers-can-define-availability-slots-clients-can-pick-a-slot-create-a-booking-and-see-booking-status-prevent-double-booking-of-the-same-slot",
+      "title": "Implement the consultation booking system: lawyers can define availability slots; clients can pick a slot, create a booking, and see booking status. Prevent double-booking of the same slot.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-in-app-1-1-messaging-between-a-client-and-a-lawyer-that-is-scoped-to-a-relationship-created-by-a-booking-or-an-explicit-client-lawyer-connection-and-is-accessible-from-both-dashboards",
+      "title": "Implement in-app 1:1 messaging between a client and a lawyer that is scoped to a relationship created by a booking (or an explicit client-lawyer connection) and is accessible from both dashboards.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-client-subscription-plans-and-entitlements-starter-ghc-99-month-professional-ghc-299-month-business-ghc-899-month-including-subscription-management-ui-and-enforcement-of-consultation-quotas-benefits-where-applicable",
+      "title": "Implement client subscription plans and entitlements: Starter (GHC 99/month), Professional (GHC 299/month), Business (GHC 899/month), including subscription management UI and enforcement of consultation quotas/benefits where applicable.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-lawyer-subscription-plans-basic-ghc-199-month-and-pro-ghc-499-month-including-subscription-management-featured-listing-priority-placement-flags-for-pro-and-a-minimal-analytics-view-for-lawyers",
+      "title": "Implement lawyer subscription plans: Basic (GHC 199/month) and Pro (GHC 499/month), including subscription management, featured listing/priority placement flags for Pro, and a minimal analytics view for lawyers.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-payment-record-tracking-for-subscriptions-and-consultations-including-a-payment-history-view-in-the-client-dashboard-and-earnings-summary-in-the-lawyer-dashboard-use-an-in-app-recorded-payment-flow-no-external-processor-integration-with-clear-statuses-pending-paid-refunded",
+      "title": "Add payment record tracking for subscriptions and consultations, including a Payment History view in the client dashboard and earnings summary in the lawyer dashboard. Use an in-app “recorded payment” flow (no external processor integration) with clear statuses (pending/paid/refunded).",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-client-dashboard-features-upcoming-consultations-chat-access-payment-history-subscription-management-document-vault-upload-store-download-files-as-frontend-only-attachments-metadata-or-small-text-documents-and-saved-lawyers",
+      "title": "Implement client dashboard features: upcoming consultations, chat access, payment history, subscription management, document vault (upload/store/download files as frontend-only attachments metadata or small text documents), and saved lawyers.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-lawyer-dashboard-features-booking-calendar-client-messages-earnings-summary-availability-settings-reviews-view-and-subscription-upgrade-controls",
+      "title": "Implement lawyer dashboard features: booking calendar, client messages, earnings summary, availability settings, reviews view, and subscription upgrade controls.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-reviews-system-clients-can-leave-a-rating-and-written-review-for-a-lawyer-after-a-completed-consultation-ratings-contribute-to-the-lawyer-s-displayed-rating-and-directory-filter",
+      "title": "Add a reviews system: clients can leave a rating and written review for a lawyer after a completed consultation; ratings contribute to the lawyer’s displayed rating and directory filter.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-seed-the-backend-with-example-lawyers-with-practice-areas-locations-languages-experience-fees-sample-availability-so-the-directory-and-profile-pages-are-usable-without-manual-data-entry-and-provide-a-minimal-join-as-a-lawyer-flow-that-creates-a-lawyer-profile-for-the-logged-in-lawyer-account",
+      "title": "Seed the backend with example lawyers (with practice areas, locations, languages, experience, fees, sample availability) so the directory and profile pages are usable without manual data entry, and provide a minimal “Join as a Lawyer” flow that creates a lawyer profile for the logged-in lawyer account.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-static-generated-brand-assets-logo-and-simple-ui-illustrations-and-render-them-from-the-frontend-as-static-assets-under-frontend-public-assets-generated",
+      "title": "Add static generated brand assets (logo and simple UI illustrations) and render them from the frontend as static assets under frontend/public/assets/generated.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Client subscription plans (Starter/Professional/Business) with billing, plan limits/entitlements, and subscription management",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Lawyer subscription plans (Basic/Pro) including featured listing upgrade, priority placement, analytics, and lead notifications",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Lawyer directory with filters (practice area, location, experience, language, rating, availability) and lawyer cards",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Verified lawyer profiles (bio, credentials, expertise, reviews, consultation fee, available time slots) with CTAs to book/subscribe",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Consultation booking system with availability/calendar and scheduling flow",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "In-app chat/messaging between clients and lawyers",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Client dashboard: upcoming consultations, chat, payment history, subscription management, document vault, saved lawyers",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Lawyer dashboard: booking calendar, client messages, earnings summary, availability settings, reviews, subscription upgrades",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Payments support for consultations and subscription billing; optional commission (10–20%) on paid consultations",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Marketing/public website pages: homepage sections (hero, how-it-works, plan previews, testimonials, business section) and key CTAs",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Support an optional commission model on paid consultations with a configurable commission rate between 10% and 20%, and reflect commission deductions in the lawyer earnings summary.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "LawConnect",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

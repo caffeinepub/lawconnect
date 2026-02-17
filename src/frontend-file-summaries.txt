@@ -1,0 +1,13 @@
+{
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup, defining all routes (public and authenticated) with proper role-based access control using UserRole enum from backend.",
+  "frontend/src/components/auth/RequireRole.tsx": "Role-based access control component that restricts page access based on UserRole enum, redirecting unauthorized users to appropriate dashboards or showing access denied screen.",
+  "frontend/src/pages/auth/OnboardingRole.tsx": "Onboarding page where new users select their role (client or lawyer) using UserRole enum values, with visual role selection cards and navigation to appropriate dashboard.",
+  "frontend/src/pages/booking/BookConsultation.tsx": "Consultation booking page with date/time selection form, displaying lawyer details and fee summary, using correct route ID for useParams.",
+  "frontend/src/pages/dashboard/ClientDashboard.tsx": "Client dashboard with tabs for consultations, chat, payments, documents, and saved lawyers, using proper Link params for dynamic routes.",
+  "frontend/src/pages/dashboard/LawyerDashboard.tsx": "Lawyer dashboard showing bookings, earnings, reviews, and settings with analytics cards, using proper Link params for profile navigation.",
+  "frontend/src/pages/directory/FindLawyers.tsx": "Lawyer directory page with search and filter functionality, displaying lawyer cards with proper Link params for profile navigation.",
+  "frontend/src/pages/lawyers/LawyerProfile.tsx": "Detailed lawyer profile page showing bio, credentials, reviews, and booking options, using correct route ID for useParams.",
+  "frontend/src/pages/subscriptions/LawyerPlans.tsx": "Lawyer subscription plans page displaying Basic and Pro tiers with pricing and features in GHC currency.",
+  "frontend/src/index.css": "Global CSS file with Tailwind directives and custom OKLCH color system for light and dark modes, featuring warm earth-tone palette for legal/professional aesthetic.",
+  "frontend/tailwind.config.js": "Tailwind configuration with extended theme including custom colors (OKLCH-based), typography (Inter/Merriweather fonts), border radius, shadows, and animations for a distinctive legal services design."
+}
